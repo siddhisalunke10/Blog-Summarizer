@@ -1,8 +1,8 @@
 """
-Blog Summarizer using Claude API
+Blog Summarizer using Gemini API
 Author: Siddhi Salunke
 Description: Fetches a blog from a URL, extracts clean text,
-             summarizes it using Claude API, and validates the output.
+             summarizes it using Gemini API, and validates the output.
 """
 
 import requests
@@ -11,10 +11,10 @@ from google import genai
 from dotenv import load_dotenv
 import os
 
-# Load API key from .env file
+
 load_dotenv()
 
-# Initialize Gemini client
+
 client = genai.Client(api_key=os.getenv("GEMINI_API_KEY"))
 
 def fetch_blog(url):
@@ -27,11 +27,11 @@ def fetch_blog(url):
     
     soup = BeautifulSoup(response.text, "html.parser")
     
-    # Remove unnecessary elements
+   
     for tag in soup(["nav", "footer", "header", "script", "style", "aside"]):
         tag.decompose()
     
-    # Extract clean text
+    
     text = soup.get_text(separator=" ", strip=True)
     return text
 
